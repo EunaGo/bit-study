@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>member manager program</title>
+
+    <link href="mbManager.css" rel="stylesheet">
+    <script src="mbManager.js"></script>
+
+
+</head>
+<body>
+    <header>
+        <h1>회원관리 프로그램</h1>
+    </header>
+    <div id="content">
+        <div id="reg">
+            <h2 class="title">회원 등록</h2>
+            <form id="regForm" action="none">
+                <table>
+                    <tr>
+                        <td>
+                            <label>아이디</label>
+                            <input type="text" id="uid" placeholder="아이디를 입력하세요." required>
+                        </td>
+                        
+                        <td>
+                            <label>비밀번호</label>
+                            <input type="password" id="pw" placeholder="비밀번호를 입력하세요." required>
+                        </td>
+                        
+                        <td>
+                            <label>이름</label>
+                            <input type="text" id="uname" placeholder="이름을 입력하세요." required>
+                        </td>
+
+                        <td>
+                            <input type="submit" value="등록">
+                        </td>
+                    </tr>
+                </table>
+
+            </form>
+        </div>
+
+        <div id="edit">
+            <h2 class="title">회원 수정</h2>
+            <form id="editForm">
+                <input type="hidden" id="idx" required> 
+                <table>
+                    <tr>
+                        <td>
+                            <label>아이디</label>
+                            <input type="text" id="eid" placeholder="아이디를 입력하세요." required>
+                        </td>
+                        
+                        <td>
+                            <label>비밀번호</label>
+                            <input type="password" id="pw" placeholder="비밀번호를 입력하세요." required>
+                        </td>
+                        
+                        <td>
+                            <label>이름</label>
+                            <input type="text" id="ename" placeholder="이름을 입력하세요." required>
+                        </td>
+
+                        <td>
+                            <input type="submit" value="수정">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+    
+    <div class="listarea">
+        <h2 class="title">회원리스트</h2>
+        <div id="list">
+
+        </div>
+    </div>
+
+</body>
+</html>

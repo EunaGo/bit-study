@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/jquery-1.2.3.pack.js"></script>
+    <script type="text/javascript" src="../js/jquery.rolling.js"></script>
+    <script>
+        function makeRolling() {
+            var content = " ";
+            var rollingDiv = $("#rolling");
+
+            rollingDiv.unbind("mouseover");
+            rollingDiv.unbind("mouseout");
+            rollingDiv.unbind("rolling");
+            rollingDiv.unbind("viewing");
+            rollingDiv.unbind("start");
+            rollingDiv.unbind("stop");
+            rollingDiv.unbind("revese");
+
+            content += "var rollingDiv = $(\"#rolling\");\r\n";
+
+            var f = document.rollingForm;
+            rollingDiv.rolling(f.direction[f.direction.selectedIndex].value, f.width.value, f.height.value, f.viewingItemCount.value);
+            content += "rollingDiv.rolling(\"" + f.direction[f.direction.selectedIndex].value + "\", " + f.width.value + ", " + f.height.value + ", " + f.viewingItemCount.value + ");\r\n";
+
+            if (f.mouseEvent.checked) {
+                rollingDiv.bind("mouseover", function () {
+                    $("#rolling").stopRolling();
+                });
+
+                rollingDiv.bind("mouseout", function () {
+                    $("#rolling").resumeRolling();
+                });
+
+                content += "rollingDiv.bind(\"mouseover\", function() {\r\n";
+                content += "\t$(\"#rolling\").stopRolling();\r\n";
+                content += "});\r\n";
+                content += "rollingDiv.bind(\"mouseout\", function() {\r\n";
+                content += "\t$(\"#rolling\").resumeRolling();\r\n";
+                content += "});\r\n";
+            }
+
+            for (var i = 0; i < 5; i++) {
+                var item = eval("f.item" + i + ".value");
+                if (item != "") {
+                    rollingDiv.addRollingItem(jQuery.trim(item));
+                    content += "rollingDiv.addRollingItem(\"" + jQuery.trim(item) + "\");\r\n";
+                }
+            }
+
+            rollingDiv.bindRollingEvent(function (event, currentRollingItem) {
+                // write code when rolling
+            });
+            rollingDiv.bindViewingEvent(function (event, currentRollingItem) {
+                // write code when viewing
+            });
+            rollingDiv.bindStartEvent(function (event) {
+                // write code when start
+            });
+            rollingDiv.bindStopEvent(function (event) {
+                // write code when stop
+            });
+
+
+            content += "rollingDiv.bindRollingEvent(function(event, currentRollingItem) {\r\n";
+            content += "\t// write code when rolling\r\n";
+            content += "});\r\n";
+
+            content += "rollingDiv.bindViewingEvent(function(event, currentRollingItem) {\r\n";
+            content += "\t// write code when viewing\r\n";
+            content += "});\r\n";
+
+            content += "rollingDiv.bindStartEvent(function(event) {\r\n";
+            content += "\t// write code when start\r\n";
+            content += "});\r\n";
+
+            content += "rollingDiv.bindStopEvent(function(event) {\r\n";
+            content += "\t// write code when stop\r\n";
+            content += "});\r\n";
+
+            content += "rollingDiv.bindReverseEvent(function(event) {\r\n";
+            content += "\t// write code when reverse\r\n";
+            content += "\t// alert($(\"#rolling\").getRollingDirection());\r\n";
+            content += "});\r\n";
+
+            rollingDiv.startRolling(f.rollingAnimationTime.value, f.viewingTime.value, f.rollingAnimationFrame.value);
+            content += "rollingDiv.startRolling(" + f.rollingAnimationTime.value + ", " + f.viewingTime.value + ", " + f.rollingAnimationFrame.value + ");\r\n";
+            $("#script").text(content);
+        }
+
+        function execute() {
+            eval(document.rollingForm.script.value);
+        }
+    </script>
+</head>
+
+<body>
+
+    <h1>Generating Rolling Example</h1>
+    <hr>
+    <form name="rollingForm">
+        <table border="1">
+            <tr>
+                <td width="250">Item Width</td>
+                <td><input name="width" type="text" size="3" value="130">
+            </tr>
+            <tr>
+                <td>Item Height</td>
+                <td><input name="height" type="text" size="3" value="100">
+            </tr>
+            <tr>
+                <td>Direction</td>
+                <td>
+                    <select name="direction">
+                        <option value="left">left</option>
+                        <option value="right" selected>right</option>
+                        <option value="up">up</option>
+                        <option value="down">down</option>
+                    </select>
+            </tr>
+            <tr>
+                <td>Viewing Item Count</td>
+                <td><input name="viewingItemCount" type="text" size="1" value="4">
+            </tr>
+            <tr>
+                <td>Rolling Animation Time</td>
+                <td><input name="rollingAnimationTime" type="text" size="3" value="10">
+            </tr>
+            <tr>
+                <td>Viewing Time</td>
+                <td><input name="viewingTime" type="text" size="4" value="1000">
+            </tr>
+            <tr>
+                <td>Rolling Animation Frame</td>
+                <td><input name="rollingAnimationFrame" type="text" size="3" value="100">
+            </tr>
+            <tr>
+                <td>When mouseover, rolling stop?</td>
+                <td><input name="mouseEvent" type="checkbox" checked>
+            </tr>
+            <tr>
+                <td>Item #1</td>
+                <td>
+                    <textarea name="item0" rows="4" cols="50" wrap="off">
+<a href='http://www.youtube.com/watch?v=8-cHCvRvgY8' target='_new'><img src='../images/coffee1.jpg' width='130' height='100' alt='first item' border='0'/></a>
+</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Item #2</td>
+                <td>
+                    <textarea name="item1" rows="4" cols="50" wrap="off">
+<a href='http://www.youtube.com/watch?v=izaGSB3ZeyM' target='_new'><img src='../images/coffee2.jpg' width='130' height='100' alt='second item' border='0'/></a>
+</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Item #3</td>
+                <td>
+                    <textarea name="item2" rows="4" cols="50" wrap="off">
+<a href='http://www.youtube.com/watch?v=7pfnqsEEEpo' target='_new'><img src='../images/coffee3.jpg' width='130' height='100' alt='third item' border='0'/></a>
+</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Item #4</td>
+                <td>
+                    <textarea name="item3" rows="4" cols="50" wrap="off">
+<a href='http://www.youtube.com/watch?v=nmTcmFRH9us' target='_new'><img src='../images/coffee4.jpg' width='130' height='100' alt='fourth item' border='0'/></a>
+</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Item #5</td>
+                <td>
+                    <textarea name="item4" rows="4" cols="50" wrap="off">
+<a href='http://www.youtube.com/watch?v=k5YzikVlsvo' target='_new'><img src='../images/coffee5.jpg' width='130' height='100' alt='fifth item' border='0'/></a>
+</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2"><input type="button" value="generate"
+                        onclick="javascript: makeRolling()"></td>
+            </tr>
+        </table>
+        <p>
+        <table>
+            <tr>
+                <td>
+                    <div id="rolling"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="button" value="reverse rolling" onclick="javascript: $('#rolling').reverseRolling()">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><textarea id="script" rows="20" cols="100" wrap="off"></textarea>
+                <td></td>
+        </table>
+        <tr>
+            <td align="center"><input type="button" value="execute this script" onclick="javascript: execute()"></td>
+        </tr>
+    </form>
+
+</body>
+
+</html>

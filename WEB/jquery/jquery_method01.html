@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery 문서객체 다루기</title>
+
+    <style>
+
+        .title{
+            background-color: black;
+            color: cornsilk;
+        }
+
+        button.rmClass, button.attr, button.css, button.btn{
+            padding: 10px;
+            font-size: 1.5em;
+        }
+
+        img{
+            display: block;
+        }
+
+        div.memo{
+            padding: 10px;
+            border: 1px solid black;
+            margin: 10px;
+            color: blue;
+
+        }
+
+
+
+
+    </style>
+
+
+    <!-- jquery liv CDN을 통해서 로드 -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    <script>
+
+        $(document).ready(function(){
+        
+            // 클래스 속성을 추가, 삭제
+            // 추가 : addClass(클래스 속성 값)
+            // 삭제 : removeClass()
+            $('h1').addClass('title');
+            $('h1').addClass('font');
+
+            $('button.rmClass').click(function(){
+                $('h1').removeClass('title');
+
+
+            });
+
+            // 속성을 변경하는 attr() 메서드
+            // getter: attr(속성이름)
+            var imgPath = $('img').attr('src');
+            console.log('imgPath: '+imgPath);
+
+            // setter:
+            // jQuery.attr(속성이름, 속성값)
+            // jQuery.attr(속성이름, 함수) !! 함수는 속성에 들어갈 수 있는 데이터를 반환
+            // // jQuery.attr({}) {} 객체 안에는 속성이름: 속성값 들을 정의
+
+            var btn01 = $('button.attr.string');
+            var btn02 = $('button.attr.func');
+            var btn03 = $('button.attr.obj');
+            var btn04 = $('button.attr.rm');
+
+            var img01=$('img').first();
+            btn01.css('color','red');
+            btn02.css('color','blue');
+            btn03.css('color','green');
+
+            // string - string
+            btn01.click(function(){
+                img01.attr('src','../images/cat.jpg');
+
+
+            });
+            // string - function(){}
+            btn02.click(function(){
+                $('img').attr('height',function(index){
+                    return (index+1)*100;
+                });
+
+            });
+
+            // {}
+            btn03.click(function(){
+                $('img:last').attr({
+                    src:'../images/rabbit.jpg',
+                    width: 500,
+                    height: 300,
+                    alt:'변경'
+                });
+
+
+            });
+            
+            // remove Attribute
+            btn04.click(function(){
+                $('img:last').removeAttr('src');
+            });
+
+                // 속성값을 컨트롤 css() 
+        // jQuery.css(스타일 속성이름) : getter >> 현재 속성값을 반환
+        var colorVal = $('div.memo').first().css('color');
+        console.log('color value: '+colorVal);
+
+
+        // css()
+        // jQuery.css(스타일속성이름, 속성값)
+        // jQuery.css(스타일속성이름, 함수)
+        // jQuery.css(스타일속성이름, 객체)
+
+        var btn05 = $('button.css.string');
+        var btn06 = $('button.css.func');
+        var btn07 = $('button.css.obj');
+
+        btn05.click(function(){
+            $('div.memo').css('color','red');
+        });
+
+
+        var colors = ['orange','black', 'green'];
+
+        // string, function(){}
+        btn06.click(function(){
+            $('div.memo').css('background-color',function(index){
+                return colors[index];
+            });
+
+        });
+
+
+        // {}
+        btn07.click(function(){
+            $('div.memo:last').css({
+                fontSize:'2em',
+                borderWidth: function(index){
+                    return (index+1)*10;
+                }
+
+            });
+
+        });
+
+        // jQuery.html()
+        // jQuery.text()
+
+        var headerDiv = $('div.header');
+
+        console.log('html(): '+headerDiv.html());
+        console.log('text(): '+headerDiv.text());
+
+        // jQuery.html(html문자열)
+        // jQuery.text(문자열)
+        // headerDiv.html('<h3>변경된 문자열</3>');
+        // headerDiv.text('<h3>변경된 문자열</3>');
+
+        var btn08 = $('button.btn.rm:eq(0)');
+        var btn09 = $('button.btn.rm').eq(1);
+
+        // jQuery.empty(): 객체 안의 내용을 지워준다.
+        btn08.click(function(){
+
+            headerDiv.empty();
+
+        });
+
+        // jQuery.remove(): 캐스팅된 객체를 삭제
+        btn09.click(function(){
+            headerDiv.remove();
+
+        });
+
+        var btn10 = $('button.btn.insert:first()');
+        var btn11 = $('button.btn.insert:last');
+
+        btn10.click(function(){
+
+            $('<h1></h1>').html('내용 추가 !!').appendTo('body');
+
+        });
+
+        btn11.click(function(){
+
+            $('<h3></h3>').html('제목요소 추가 !!').appendTo('div.header');
+
+        });
+
+        });
+
+    
+
+
+    </script>
+
+
+</head>
+<body>
+
+    <button class="btn insert">body tag에 요소 추가</button>
+    <button class="btn insert">div.header에 요소 추가</button>
+    
+    
+    <hr>
+
+    <button class="btn rm">내용 삭제</button>
+    <button class="btn rm">tag 삭제</button>
+
+
+    <div class="header">
+        <h1>제목</h1>
+
+    </div>
+
+    <div class="memo">ㅎㅇ</div>
+    <div class="memo">ㅂㄱ</div>
+    <div class="memo">ㅃㅇ</div>
+
+
+
+    <img src="../images/dog.jpg" height="200">
+
+    <button class='css string'>string-string</button>
+    <button class='css func'>string-function</button>
+    <button class='css obj'>Object {}</button>
+    <button class='attr string'>string-string</button>
+    <button class='attr func'>string-function</button>
+    <button class='attr obj'>Object {}</button>
+    <button class='attr rm'>removeAttr</button>
+
+
+
+
+
+    <h1>안녕하세용</h1>
+    <button class="rmClass">removeClass</button>
+</body>
+</html>
