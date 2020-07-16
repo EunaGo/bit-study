@@ -18,27 +18,28 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import jdbc.ConnectionProvider;
 import member.dao.MemberDao;
 import member.model.Member;
-
 import service.Service;
 
 public class MemberRegServiceImpl implements Service {
-	
-	MemberDao dao;
 
+MemberDao dao;
+	
 	@Override
-	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
-		 
-		// 파일 업로드 - 사진
-		// 사용자  데이터를 받기 - uid, upw, uname, uphoto
+	public String getViewPage(
+			HttpServletRequest request, 
+			HttpServletResponse response) {
 		
+		// 파일 업로드 - 사진
+		// 사용자 데이터를 받기 - uid, upw, uname, uphoto
+
 		int resultCnt = 0;
 		
 		// 데이터 베이스에 입력할 데이터 변수
-		String uid =null;
+		String uid = null;
 		String upw = null;
-		String uname=null;
-		String uphoto=null;
-
+		String uname = null;
+		String uphoto = null;
+		
 		Connection conn = null;
 
 		try {
@@ -75,14 +76,11 @@ public class MemberRegServiceImpl implements Service {
 						}
 						
 					} else { // type=file
-	
+						
 						// 서버 내부의 경로
 						String uri = "/upload/users";
-						
-						
-						// String uri = "/file";
 	
-						// String uri = request.getSession().getServletContext().getInitParameter("uploadPath");
+						//String uri = request.getSession().getServletContext().getInitParameter("uploadPath");
 	
 						// 시스템의 실제(절대) 경로
 						String realPath = request.getSession().getServletContext().getRealPath(uri);
@@ -111,12 +109,13 @@ public class MemberRegServiceImpl implements Service {
 				
 				conn = ConnectionProvider.getConnection();
 				
-				dao = MemberDao.getInstance();
+				dao = MemberDao.getInstance() ;
 				
 				resultCnt = dao.insertMember(conn, member);
-
+				
 				request.setAttribute("member", member);
 				request.setAttribute("result", resultCnt);
+				
 				
 	
 			}
@@ -126,9 +125,10 @@ public class MemberRegServiceImpl implements Service {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}catch(SQLException e) {
+		} catch (SQLException e) {
+			// TODO: handle exception
 			e.printStackTrace();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -143,9 +143,6 @@ public class MemberRegServiceImpl implements Service {
 			}
 			
 		}
-		
-
-		//return resultCnt;
 		
 		return "/WEB-INF/views/member/reg.jsp";
 	}
