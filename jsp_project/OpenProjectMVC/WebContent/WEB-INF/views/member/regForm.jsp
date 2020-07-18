@@ -18,6 +18,10 @@
 	.check_not {
 		color : red;
 	}
+	#form {
+	margin: 10px auto;
+}
+	
 	#idchk {
 		display: none;
 	}
@@ -56,7 +60,7 @@
 					<td> 
 						<input type="submit" name="회원가입">
 						<input type="reset">
-						<a href="memberList.do">회원 확인하기</a>
+						
 					</td>
 				</tr>
 			</table>

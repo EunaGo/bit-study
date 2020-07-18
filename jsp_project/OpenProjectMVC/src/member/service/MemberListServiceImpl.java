@@ -18,19 +18,21 @@ public class MemberListServiceImpl implements Service {
 
 	MemberDao dao;
 
-	// 한 페이지에 표현할 메시지의 개수
-	private final int MESSAGE_COUNT_PER_PAGE = 3;
+	
 
 	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
 
 		// 페이지 번호 -> 시작 행, 끝 행
 		// dao -> List
 
-		int pageNumber = 1;
 		Connection conn = null;
 
 		MemberListView listview = null;
+		
+		// 한 페이지에 표현할 메시지의 개수
+		final int MESSAGE_COUNT_PER_PAGE = 3;
 
+	
 		try {
 
 			conn = ConnectionProvider.getConnection();
@@ -42,29 +44,34 @@ public class MemberListServiceImpl implements Service {
 
 			// 전체 메시지의 게수
 			int memberTotalCount = dao.selectTotalCount(conn);
+			
+			// 현재 페이지 번호
+			int pageNumber = 1;
+			String page = request.getParameter("page");
+			if (page != null) {
+				try {
+					pageNumber = Integer.parseInt(page);
+				} catch (NumberFormatException e) {
+					System.out.println("숫자 타입의 문자열이 전달되지 않아 예외 발생");
+				}
+			}
 
 			int startRow = 0;
-			int endRow = 0;
 
 			if (memberTotalCount > 0) {
 
 				// 시작 행, 마지마 행
-				startRow = (pageNumber - 1) * MESSAGE_COUNT_PER_PAGE + 1;
-				endRow = startRow + MESSAGE_COUNT_PER_PAGE - 1;
+				startRow = (pageNumber - 1) * MESSAGE_COUNT_PER_PAGE ;
+				
 
-				memberList = dao.selectMemberList(conn, startRow, endRow);
+				memberList = dao.selectMemberList(conn, startRow, MESSAGE_COUNT_PER_PAGE);
 
 			} else {
 				pageNumber = 0;
 				memberList = Collections.emptyList();
 			}
 
-			listview = new MemberListView(memberTotalCount, 
-					pageNumber, 
-					memberList, 
-					MESSAGE_COUNT_PER_PAGE, 
-					startRow,
-					endRow);
+			listview = new MemberListView(memberTotalCount, pageNumber, memberList, memberTotalCount, MESSAGE_COUNT_PER_PAGE, startRow); 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -83,6 +90,7 @@ public class MemberListServiceImpl implements Service {
 			}
 
 		}
+
 		request.setAttribute("listView", listview);
 
 		return "/WEB-INF/views/member/memberList.jsp";

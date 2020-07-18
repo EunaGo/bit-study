@@ -16,8 +16,7 @@ public class MemberListView {
 	private int memberCountPerpage;
 	// 게시물의 시작 행
 	private int startRow;
-	// 게시물의 마지막 행
-	private int endRow;
+
 
 		public MemberListView(int memberTotalCount, 
 				int currentPageNumber, 
@@ -32,7 +31,7 @@ public class MemberListView {
 			this.pageTotalCount = pageTotalCount;
 			this.memberCountPerpage = memberCountPerpage;
 			this.startRow = startRow;
-			this.endRow = endRow;
+			
 			calTotalPageCount();
 		}
 
@@ -99,19 +98,13 @@ public class MemberListView {
 		this.startRow = startRow;
 	}
 
-	public int getEndRow() {
-		return endRow;
-	}
 
-	public void setEndRow(int endRow) {
-		this.endRow = endRow;
-	}
 
 	@Override
 	public String toString() {
 		return "MemberListView [memberTotalCount=" + memberTotalCount + ", currentPageNumber=" + currentPageNumber
 				+ ", messageList=" + memberList + ", pageTotalCount=" + pageTotalCount + ", memberCountPerpage="
-				+ memberCountPerpage + ", startRow=" + startRow + ", endRow=" + endRow + "]";
+				+ memberCountPerpage + ", startRow=" + startRow + ", endRow=" + "]";
 	}
 	public boolean isEmpty() {
 		return memberTotalCount==0;

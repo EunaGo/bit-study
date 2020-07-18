@@ -8,12 +8,12 @@
 
 	<!--FrontController 등록-->
   <servlet>
-  	<servlet-name>FrontColtroller</servlet-name>
+  	<servlet-name>FrontController</servlet-name>
   	<servlet-class>controller.FrontController</servlet-class>
   	<load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>FrontColtroller</servlet-name>
+  	<servlet-name>FrontController</servlet-name>
   	<!--<url-pattern>/</url-pattern>-->
   	 <url-pattern>*.do</url-pattern> 
   </servlet-mapping>

@@ -23,9 +23,9 @@ public class DeleteMessageService {
 		Connection conn = null;
 		Message message = null;
 		
-		// 1. mid ÀÇ ¹Ì½ÃÁö Á¸Àç ÇÏ´ÂÁö È®ÀÎ
-		// 2. ¸Þ½ÃÁö°¡ Á¸Àç ÇÏ¸é °´Ã¼ÀÇ pw »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ pw ºñ±³
-		// 3. ºñ±³ÀÇ °á°ú°¡ °°´Ù¸é midÀÇ ¹Ì½ÃÁö¸¦ »èÁ¦
+		// 1. mid ï¿½ï¿½ ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+		// 2. ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¸ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ pw ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ pw ï¿½ï¿½
+		// 3. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ midï¿½ï¿½ ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		try {
 			conn = ConnectionProvider.getConnection();
@@ -35,15 +35,15 @@ public class DeleteMessageService {
 			
 			if(message == null) {
 				resultCnt = -1;
-				throw new Exception("»èÁ¦ ÇÒ ¸Þ½ÃÁö°¡ Á¸ÀçÇÏÁö ¾ÊÀ½.");
+				throw new Exception("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.");
 			}
 			
 			if(!message.getPw().equals(pw)) {
 				resultCnt = -2;
-				throw new Exception("ºñ¹Ð¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾ÊÀ½.");
+				throw new Exception("ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.");
 			}
 			
-			// »èÁ¦
+			// ï¿½ï¿½ï¿½ï¿½
 			resultCnt = dao.deleteMessage(conn, mid);
 			
 						

@@ -2,11 +2,21 @@
 #uri=Class Full Name
 #/=service.IndexServiceImpl index.html
 /index.do=service.IndexServiceImpl
-#È¸¿ø°¡ÀÔ ÆäÀÌÁö
+# È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /member/memberRegForm.do=member.service.MemberRegFormServiceImpl
-#È¸¿ø °¡ÀÔ Ã³¸®
+# È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 /member/memberReg.do=member.service.MemberRegServiceImpl
-# È¸¿ø °¡ÀÔ½Ã ¾ÆÀÌµğ Ã¼Å©
+# È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ô½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ Ã¼Å©
 /member/idCheck.do=member.service.IdCheckServiceImpl
-# È¸¿ø ¸®½ºÆ® Ãâ·Â
+# È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ 
 /member/memberList.do=member.service.MemberListServiceImpl
+# È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+/member/memberDelete.do=member.service.MemberDeleteServiceImpl
+# íšŒì› ìˆ˜ì •
+/member/memberEdit.do=member.service.MemberEditServiceImpl
+# íšŒì› ìˆ˜ì • í¼
+/member/memberEditForm.do=member.service.MemberEditFormServiceImpl
+# íšŒì› ë¡œê·¸ì¸ í¼
+/member/memberLogForm.do=member.service.MemberLogFormServiceImpl
+# íšŒì› ë¡œê·¸ì¸ 
+/member/memberLogin.do=member.service.MemberLoginServiceImpl
