@@ -1,21 +1,15 @@
 package member.service;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import com.mysql.cj.Session;
 
 import jdbc.ConnectionProvider;
 import member.dao.MemberDao;
-import member.model.Member;
 import service.Service;
 
 public class MemberLoginServiceImpl implements Service {
@@ -24,8 +18,52 @@ public class MemberLoginServiceImpl implements Service {
 
 	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
 
-		
+		int resultCnt = 0;
 
+		String uid = null;
+		String upw = null;
+
+		Connection conn = null;
+
+		try {
+
+
+			conn = ConnectionProvider.getConnection();
+
+			dao = MemberDao.getInstance();
+			
+			uid = request.getParameter("uid");
+			upw = request.getParameter("upw");
+
+			System.out.println("uid: "+uid+"upw: "+upw);
+			resultCnt = dao.confirmIdPw(conn, uid,upw);
+
+			request.setAttribute("result", resultCnt);
+			
+			if(resultCnt < 1) {
+				System.out.println("불일치!!");
+				return "/WEB-INF/views/member/memberLogForm.jsp";
+			}
+
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
 		return "/WEB-INF/views/member/memberMypage.jsp";
 	}
 

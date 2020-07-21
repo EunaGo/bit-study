@@ -20,3 +20,9 @@
 /member/memberLogForm.do=member.service.MemberLogFormServiceImpl
 # 회원 로그인 
 /member/memberLogin.do=member.service.MemberLoginServiceImpl
+# 마이페이지 폼
+/member/memberMypage.do=member.service.MemberMypageServiceImpl
+# 비회원 방명록 폼
+/member/Guestbook.do=member.service.GuestBookFormServiceImpl
+# 회원 방명록 폼
+/member/memberGuestbook.do=member.service.MemberGuestBookFormServiceImpl

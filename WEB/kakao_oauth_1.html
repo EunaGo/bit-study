@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Kakao JavaScript SDK</title>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+
+
+        // SDK 초기화 여부를 판단합니다.
+        console.log(Kakao.isInitialized());
+
+    </script>
+</head>
+
+<body>
+    <a id="kakao-login-btn"></a>
+    <a href="http://developers.kakao.com/logout"></a>
+
+    <script type='text/javascript'>
+        //<![CDATA[
+        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('93566b80fb99a5007a395716fd157aaa');
+
+        // 카카오 로그인 버튼을 생성합니다.
+        Kakao.Auth.createLoginButton({
+            container: '#kakao-login-btn',
+            success: function(authObj) {
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function(res) {
+                        alert(JSON.stringify(res))
+                    },
+                    fail: function(error) {
+                        alert(
+                            'login success, but failed to request user information: ' +
+                            JSON.stringify(error)
+                        )
+                    },
+                })
+            },
+            fail: function(err) {
+                alert(JSON.stringify(err));
+            }
+        });
+        //
+
+    </script>
+</body>
+
+</html>

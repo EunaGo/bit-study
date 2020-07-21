@@ -30,6 +30,7 @@ tr, td {
 }
 
 </style>
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -58,8 +59,8 @@ tr, td {
 					<td><img src="<c:url value="${member.uphoto}"/>" width=50
 						height=50></td>
 					<td>${member.regdate}</td>
-					<td><a href="memberDelete.do?idx=${member.idx}">삭제</a> <a
-						href="memberEditForm.do?idx=${member.idx}">수정</a></td>
+					<td><a href="memberDelete.do?idx=${member.idx}" >삭제</a> 
+					<a href="memberEditForm.do?idx=${member.idx}" >수정</a></td>
 				</tr>
 
 			</c:forEach>
@@ -79,5 +80,23 @@ tr, td {
 
 	</c:if>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+	<script>
+	//var form = document.getElementById("delForm");
+	
+	function deletecheck(){
+		if(confirm('삭제하시겠습니까?')){
+			location.href="memberDelete.do?idx="{member.idx};
+		}
+		return false;
+	};
+	
+	function editcheck(){
+		if(confirm('수정하시겠습니까?')){
+			return true;
+		}
+		return false;
+	};
+	
+</script>
 </body>
 </html>

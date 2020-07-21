@@ -104,6 +104,34 @@ public class MemberDao {
 
 		return member;
 	}
+	
+	public int confirmIdPw(Connection conn, String uid, String upw) throws SQLException {
+
+		int resultCnt = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs;
+
+		try {
+			String sql = "select * from project.member where uid=? and upw=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, uid);
+			pstmt.setString(2, upw);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				resultCnt = rs.getInt(1);
+			}
+
+		} finally {
+			if (pstmt != null) {
+				pstmt.close();
+			}
+		}
+		System.out.println("resultCnt: "+resultCnt);
+		return resultCnt;
+	}
 
 	public int selectTotalCount(Connection conn) throws SQLException {
 
