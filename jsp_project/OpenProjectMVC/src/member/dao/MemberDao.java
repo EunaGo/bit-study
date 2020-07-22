@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import member.model.LoginInfo;
 import member.model.Member;
 
 public class MemberDao {
@@ -25,7 +26,7 @@ public class MemberDao {
 		int resultCnt = 0;
 
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO project.member (uid, upw, uname, uphoto ) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO test.member (uid, upw, uname, uphoto ) VALUES (?,?,?,?)";
 
 		try {
 
@@ -54,7 +55,7 @@ public class MemberDao {
 		ResultSet rs;
 
 		try {
-			String sql = "select count(*) from project.member where uid=?";
+			String sql = "select count(*) from test.member where uid=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 
@@ -81,7 +82,7 @@ public class MemberDao {
 		ResultSet rs;
 
 		try {
-			String sql = "select * from project.member where idx=?";
+			String sql = "select * from test.member where idx=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 
@@ -105,15 +106,16 @@ public class MemberDao {
 		return member;
 	}
 	
-	public int confirmIdPw(Connection conn, String uid, String upw) throws SQLException {
+	public LoginInfo confirmIdPw(Connection conn, String uid, String upw) throws SQLException {
 
 		int resultCnt = 0;
+		LoginInfo logininfo = null;
 
 		PreparedStatement pstmt = null;
 		ResultSet rs;
 
 		try {
-			String sql = "select * from project.member where uid=? and upw=?";
+			String sql = "select * from test.member where uid=? and upw=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, uid);
 			pstmt.setString(2, upw);
@@ -121,7 +123,10 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				resultCnt = rs.getInt(1);
+				logininfo = new LoginInfo();
+				logininfo.setUid(rs.getString("uid"));
+				logininfo.setUpw(rs.getString("upw"));
+				logininfo.setUphoto(rs.getString("uphoto"));
 			}
 
 		} finally {
@@ -130,7 +135,7 @@ public class MemberDao {
 			}
 		}
 		System.out.println("resultCnt: "+resultCnt);
-		return resultCnt;
+		return logininfo;
 	}
 
 	public int selectTotalCount(Connection conn) throws SQLException {
@@ -143,7 +148,7 @@ public class MemberDao {
 		try {
 
 			stmt = conn.createStatement();
-			String sql = "select count(*) from project.member";
+			String sql = "select count(*) from test.member";
 			rs = stmt.executeQuery(sql);
 			if (rs.next()) {
 				resultCnt = rs.getInt(1);
@@ -171,7 +176,7 @@ public class MemberDao {
 
 		try {
 
-			String sql = "select * from project.member limit ?,?";
+			String sql = "select * from test.member limit ?,?";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
@@ -208,7 +213,7 @@ public class MemberDao {
 		ResultSet rs = null;
 
 		try {
-			String sql = "select * from project.member";
+			String sql = "select * from test.member";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 
@@ -235,7 +240,7 @@ public class MemberDao {
 
 		PreparedStatement pstmt = null;
 
-		String sql = "delete from project.member where idx=?";
+		String sql = "delete from test.member where idx=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
@@ -256,7 +261,7 @@ public class MemberDao {
 		int resultCnt = 0;
 
 		PreparedStatement pstmt = null;
-		String sql = "update project.member set upw=?, uname=?,uphoto=? where idx=?";
+		String sql = "update test.member set upw=?, uname=?,uphoto=? where idx=?";
 
 		try {
 

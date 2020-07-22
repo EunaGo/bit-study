@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +10,11 @@
 	href="<%=request.getContextPath()%>/css/default.css">
 </head>
 <body>
+
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<h1>마이페이지</h1>
+	${loginResult}
+	<a href="${pageContext.request.contextPath}/member/memberLogout.do">로그아웃</a>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

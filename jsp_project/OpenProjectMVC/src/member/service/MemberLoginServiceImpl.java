@@ -5,11 +5,13 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mysql.cj.Session;
 
 import jdbc.ConnectionProvider;
 import member.dao.MemberDao;
+import member.model.LoginInfo;
 import service.Service;
 
 public class MemberLoginServiceImpl implements Service {
@@ -19,11 +21,15 @@ public class MemberLoginServiceImpl implements Service {
 	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
 
 		int resultCnt = 0;
+		
+		LoginInfo logininfo = null;
 
 		String uid = null;
 		String upw = null;
 
 		Connection conn = null;
+		
+		HttpSession session=request.getSession();
 
 		try {
 
@@ -36,14 +42,15 @@ public class MemberLoginServiceImpl implements Service {
 			upw = request.getParameter("upw");
 
 			System.out.println("uid: "+uid+"upw: "+upw);
-			resultCnt = dao.confirmIdPw(conn, uid,upw);
+			logininfo = dao.confirmIdPw(conn, uid,upw);
 
-			request.setAttribute("result", resultCnt);
+			session.setAttribute("loginResult", logininfo);
 			
-			if(resultCnt < 1) {
+			if(logininfo == null) {
 				System.out.println("불일치!!");
 				return "/WEB-INF/views/member/memberLogForm.jsp";
 			}
+			
 
 
 		} catch (SQLException e) {

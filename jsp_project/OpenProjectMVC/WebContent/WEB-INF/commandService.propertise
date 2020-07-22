@@ -26,3 +26,7 @@
 /member/Guestbook.do=member.service.GuestBookFormServiceImpl
 # 회원 방명록 폼
 /member/memberGuestbook.do=member.service.MemberGuestBookFormServiceImpl
+# main
+/member/main.do=member.service.MainServiceImpl
+# 로그아웃
+/member/memberLogout.do=member.service.MemberLogoutServiceImpl
