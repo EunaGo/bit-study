@@ -14,11 +14,11 @@ import member.dao.MemberDao;
 import member.model.LoginInfo;
 import service.Service;
 
-public class MemberLoginServiceImpl implements Service {
+public class MemberLoginAjaxServiceImpl {
 
 	MemberDao dao;
 
-	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
+	public int AjaxPage(HttpServletRequest request, HttpServletResponse response) {
 
 		int resultCnt = 0;
 		
@@ -26,8 +26,6 @@ public class MemberLoginServiceImpl implements Service {
 
 		String uid = null;
 		String upw = null;
-		String result = "N";
-
 
 		Connection conn = null;
 		
@@ -48,22 +46,14 @@ public class MemberLoginServiceImpl implements Service {
 
 			session.setAttribute("loginResult", logininfo);
 			
-			if(logininfo != null) {
-				System.out.println("일치!!");
-//				String result = "<script>"
-//						+ "alert('아이디 또는 비밀번호가 틀립니다.');"
-//						+ "history.go(-1);"
-//						+ "</script>";
-//				request.setAttribute("result", result);
-//				return "/WEB-INF/views/member/memberLogForm.jsp";
-				
-				result = "Y";
+			if(logininfo == null) {
+				System.out.println("불일치!!");
+
+				return 0;
 			}
 			
-//			String result = "<script>"
-//					+ "alert('로그인되었습니다.');"
-//					+ "</script>";
-//			request.setAttribute("result", result);
+
+			
 
 
 		} catch (SQLException e) {
@@ -84,10 +74,7 @@ public class MemberLoginServiceImpl implements Service {
 			}
 
 		}
-//		return "/WEB-INF/views/member/memberMypage.jsp";
-		request.setAttribute("ajax", result);
-
-		return "/WEB-INF/views/member/ajax.jsp";
+		return 1;
 	}
 
 }

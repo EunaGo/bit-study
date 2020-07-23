@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>대여 요청 게시판</title>
+    <title>서치 게시판</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
 
@@ -26,9 +26,9 @@
 		<br>
 		<br>
 		<br>
-		<h1>게시판 들어갈 자리</h1>
+		<h1>서치</h1>
 		
-		<c:if test="${not empty listView.requestList}">
+		<c:if test="${not empty searchView.requestList}">
 
 		<table border=1>
 			<th>게시물 번호</th>
@@ -38,7 +38,7 @@
 			<th>등록 날짜</th>
 			<th>렌탈 기간</th>
 			<th>지역</th>
-			<c:forEach items="${listView.requestList}" var="request">
+			<c:forEach items="${searchView.requestList}" var="request">
 				<tr>
 					<td>${request.req_idx}</td>
 					<td>${request.req_writer}</td>
@@ -52,12 +52,12 @@
 
 		</table>
 	</c:if>
-		<c:if test="${listView.pageTotalCount > 0}">
+		<c:if test="${searchView.pageTotalCount > 0}">
 
 		<div class="paging">
-			<c:forEach begin="1" end="${listView.pageTotalCount}" var="num">
-				<a href="boarding.do?page=${num}"
-					${listView.currentPageNumber eq num? 'class="currentPage"':''}>[
+			<c:forEach begin="1" end="${searchView.pageTotalCount}" var="num">
+				<a href="searchrequest.do?page=${num}&Search=${sch}"
+					${searchView.currentPageNumber eq num? 'class="currentPage"':''}>[
 					${num} ]</a>
 			</c:forEach>
 		</div>

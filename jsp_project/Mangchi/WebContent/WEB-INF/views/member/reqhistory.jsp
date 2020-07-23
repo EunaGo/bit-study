@@ -39,7 +39,7 @@
 		</div>
 		<h1>요청 내역</h1>
 
-		<c:if test="${not empty requesthistory}">
+		<c:if test="${not empty listView.requestList}">
 
 		<table border=1>
 			<th>게시물 번호</th>
@@ -48,7 +48,7 @@
 			<th>등록 날짜</th>
 			<th>렌탈 기간</th>
 			<th>지역</th>
-			<c:forEach items="${requesthistory}" var="request">
+			<c:forEach items="${listView.requestList}" var="request">
 				<tr>
 					<td>${request.req_idx}</td>
 					<td>${request.req_title}</td>
@@ -61,7 +61,17 @@
 
 		</table>
 	</c:if>
-		
+		<c:if test="${listView.pageTotalCount > 0}">
+
+		<div class="paging">
+			<c:forEach begin="1" end="${listView.pageTotalCount}" var="num">
+				<a href="reqhistory.do?page=${num}"
+					${listView.currentPageNumber eq num? 'class="currentPage"':''}>[
+					${num} ]</a>
+			</c:forEach>
+		</div>
+
+	</c:if>
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>

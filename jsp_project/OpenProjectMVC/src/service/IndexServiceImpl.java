@@ -10,9 +10,9 @@ public class IndexServiceImpl implements Service {
 
 	@Override
 	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session=request.getSession();
 		
-		session.setAttribute("loginResult", null);
+		//HttpSession session=request.getSession();
+		//session.setAttribute("loginResult", null);
 
 		String page = "/WEB-INF/views/member/main.jsp";
 		return page;

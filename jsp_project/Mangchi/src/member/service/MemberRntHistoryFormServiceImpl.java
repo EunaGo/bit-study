@@ -28,7 +28,7 @@ public class MemberRntHistoryFormServiceImpl implements Service {
 
 			dao = RequestDao.getInstance();	
 			
-			rentalList = dao.selectRntHistory(conn, 1);
+			rentalList = dao.selectRntHistory(conn, 2);
 			System.out.println("requestList: "+rentalList);
 
 		} catch (SQLException e) {
