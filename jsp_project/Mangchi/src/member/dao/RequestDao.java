@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import member.model.Member;
 import member.model.Request;
 
 public class RequestDao {
@@ -60,8 +59,41 @@ public class RequestDao {
 		return list;
 	}
 	
+	// 요청 카운트
+	public int selectReqCount(Connection conn, int idx) throws SQLException {
+
+		int resultCnt = 0;
+
+		PreparedStatement pstmt = null;
+
+		ResultSet rs = null;
+		
+		//System.out.println(">>>>>>> "+idx);
+		
+		try {
+			String sql = "select count(*) from project.request_list where req_writer="+idx;// where req_writer=? " ;
+			pstmt = conn.prepareStatement(sql);
+			//pstmt.setNString(1, idx+"");
+			rs = pstmt.executeQuery(sql);
+			
+			while (rs.next()) {
+				resultCnt = rs.getInt(1);
+			}
+
+		} finally {
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+		}
+		System.out.println(resultCnt);
+		return resultCnt;
+	}
+	
 	// 나의 대여 게시물
-	public List<Request> selectRntHistory(Connection conn, int idx) throws SQLException {
+	public List<Request> selectRntHistory(Connection conn, int idx, int startRow, int endRow ) throws SQLException {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs;
@@ -70,9 +102,11 @@ public class RequestDao {
 
 
 		try {
-			String sql = "select * from project.request_list where req_helper=?";
+			String sql = "select * from project.request_list where req_helper=? limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 
 			rs = pstmt.executeQuery();
 
@@ -94,6 +128,39 @@ public class RequestDao {
 		}
 
 		return list;
+	}
+	
+	// 대여 카운트
+	public int selectRntCount(Connection conn, int idx) throws SQLException {
+
+
+		int resultCnt = 0;
+
+		PreparedStatement pstmt = null;
+
+		ResultSet rs = null;
+
+		try {
+			String sql = "select count(*) from project.request_list where req_helper="+idx;
+			pstmt = conn.prepareStatement(sql);
+			
+			//pstmt.setInt(1, idx);
+			
+			rs = pstmt.executeQuery(sql);
+			if (rs.next()) {
+				resultCnt = rs.getInt(1);
+			}
+
+		} finally {
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+		}
+		System.out.println(resultCnt);
+		return resultCnt;
 	}
 	
 	// 모든 게시물
@@ -171,6 +238,7 @@ public class RequestDao {
 		return list;
 	}
 	
+	// 전체 카운트
 	public int selectTotalCount(Connection conn) throws SQLException {
 
 		int resultCnt = 0;
@@ -198,6 +266,8 @@ public class RequestDao {
 
 		return resultCnt;
 	}
+	
+	// 서치카운트
 	
 	public int selectTotalschCount(Connection conn, String sch) throws SQLException {
 
