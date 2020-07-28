@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jdbc.ConnectionProvider;
-import member.dao.RequestDao;
-import member.model.Request;
-import member.model.RequestListView;
+import request.dao.RequestDao;
+import request.model.Request;
+import request.model.RequestListView;
 import service.Service;
 
 public class RequestListSearchServiceImpl implements Service {

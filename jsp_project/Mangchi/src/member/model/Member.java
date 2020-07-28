@@ -1,131 +1,192 @@
 package member.model;
 
 import java.sql.Date;
+import java.util.List;
+
+import message.model.MessageListView;
 
 public class Member {
-	private int member_idx;
-	private String member_id;
-	private String member_pw;
-	private String member_nick;
-	private String member_score;
-	private Date member_regdate;
-	private String member_latitude;
-	private String member_longitude;
-	private String member_addr;
-	private String member_img;
+	private int idx;
+	private String id;
+	private String kid;
+	private String pw;
+	private String nick;
+	private Double score;
+	private Date regDate;
+	private String addr;
+	private String photo;
+	private double latitude;
+	private double longitude;
 	
-	public Member(int member_idx, String member_id, String member_pw, String member_nick, String member_score,
-			Date member_regdate, String member_latitude, String member_longitude, String member_addr,
-			String member_img) {
-		super();
-		this.member_idx = member_idx;
-		this.member_id = member_id;
-		this.member_pw = member_pw;
-		this.member_nick = member_nick;
-		this.member_score = member_score;
-		this.member_regdate = member_regdate;
-		this.member_latitude = member_latitude;
-		this.member_longitude = member_longitude;
-		this.member_addr = member_addr;
-		this.member_img = member_img;
-	}
 	
 	public Member() {}
-
-	public int getMember_idx() {
-		return member_idx;
+	
+	
+	
+	public Member(String id, String pw, String nick, String addr, double latitude, double longitude) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.nick = nick;
+		this.addr = addr;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
-	public void setMember_idx(int member_idx) {
-		this.member_idx = member_idx;
-	}
 
-	public String getMember_id() {
-		return member_id;
-	}
 
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
-	}
-
-	public String getMember_pw() {
-		return member_pw;
-	}
-
-	public void setMember_pw(String member_pw) {
-		this.member_pw = member_pw;
-	}
-
-	public String getMember_nick() {
-		return member_nick;
-	}
-
-	public void setMember_nick(String member_nick) {
-		this.member_nick = member_nick;
-	}
-
-	public String getMember_score() {
-		return member_score;
-	}
-
-	public void setMember_score(String member_score) {
-		this.member_score = member_score;
-	}
-
-	public Date getMember_regdate() {
-		return member_regdate;
-	}
-
-	public void setMember_regdate(Date member_regdate) {
-		this.member_regdate = member_regdate;
+	public Member(int idx, String id, String pw, String nick, String photo, Date regDate) {
+		this.idx = idx;
+		this.id = id;
+		this.pw = pw;
+		this.nick = nick;
+		this.regDate = regDate;
+		this.photo = photo;
+	};
+	
+	public Member(int idx, String id, String pw, String nick, Double score, Date regDate, String addr,
+			String photo) {
+		this.idx = idx;
+		this.id = id;
+		this.pw = pw;
+		this.nick = nick;
+		this.score = score;
+		this.regDate = regDate;
+		this.addr = addr;
+		this.photo = photo;
 	}
 	
-	// java.sql.Date -> java.util.Date
-	public java.util.Date getToDate() {
-		return new java.util.Date(member_regdate.getTime());
-	} // ${member.todate}
+	
 
-	public String getMember_latitude() {
-		return member_latitude;
+	public Member(int idx, String kid, String nick,Double score, Date regDate, String addr, String photo) {
+		this.idx = idx;
+		this.kid = kid;
+		this.nick = nick;
+		this.score = score;
+		this.regDate = regDate;
+		this.addr = addr;
+		this.photo = photo;
+	}
+	
+	
+
+	public Member(int idx, String id, String kid, String pw, String nick, Double score, Date regDate, String addr,
+			String photo, double latitude, double longitude) {
+		this.idx = idx;
+		this.id = id;
+		this.kid = kid;
+		this.pw = pw;
+		this.nick = nick;
+		this.score = score;
+		this.regDate = regDate;
+		this.addr = addr;
+		this.photo = photo;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+	
+	
+
+	public int getIdx() {
+		return idx;
 	}
 
-	public void setMember_latitude(String member_latitude) {
-		this.member_latitude = member_latitude;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 
-	public String getMember_longitude() {
-		return member_longitude;
+	public String getId() {
+		return id;
 	}
 
-	public void setMember_longitude(String member_longitude) {
-		this.member_longitude = member_longitude;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getMember_addr() {
-		return member_addr;
+	public String getKid() {
+		return kid;
 	}
 
-	public void setMember_addr(String member_addr) {
-		this.member_addr = member_addr;
+	public void setKid(String kid) {
+		this.kid = kid;
 	}
 
-	public String getMember_img() {
-		return member_img;
+	public String getPw() {
+		return pw;
 	}
 
-	public void setMember_img(String member_img) {
-		this.member_img = member_img;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	public Double getScore() {
+		return score;
+	}
+
+	public void setScore(Double score) {
+		this.score = score;
+	}
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	
+	
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "Member [member_idx=" + member_idx + ", member_id=" + member_id + ", member_pw=" + member_pw
-				+ ", member_nick=" + member_nick + ", member_score=" + member_score + ", member_regdate="
-				+ member_regdate + ", member_latitude=" + member_latitude + ", member_longitude=" + member_longitude
-				+ ", member_addr=" + member_addr + ", member_img=" + member_img + "]";
+		return "Member [idx=" + idx + ", id=" + id + ", kid=" + kid + ", pw=" + pw + ", nick=" + nick + ", score="
+				+ score + ", regDate=" + regDate + ", addr=" + addr + ", photo=" + photo + ", latitude=" + latitude
+				+ ", longitude=" + longitude + "]";
 	}
 	
-	
-	
+
+
 	
 }
