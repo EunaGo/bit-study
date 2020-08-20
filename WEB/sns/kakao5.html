@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+    <title>Login Demo - Kakao JavaScript SDK</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+</head>
+
+<body>
+    <a id="custom-login-btn" href="javascript:loginWithKakao()">
+        <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" />
+    </a>
+    <p id="token-result"></p>
+
+
+    <a id="login-form-btn" href="javascript:loginFormWithKakao()">
+        <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" />
+    </a>
+    <p id="login-form-result"></p>
+
+
+    <script type="text/javascript">
+        Kakao.init('93566b80fb99a5007a395716fd157aaa');
+
+
+
+        function loginWithKakao() {
+            Kakao.Auth.login({
+                success: function(authObj) {
+                    alert(JSON.stringify(authObj));
+
+                    Kakao.Auth.setAccessToken(authObj.access_token);
+
+                },
+                fail: function(err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+        }
+
+        function loginFormWithKakao() {
+            Kakao.Auth.loginForm({
+                success: function(authObj) {
+                    showResult(JSON.stringify(authObj))
+                },
+                fail: function(err) {
+                    showResult(JSON.stringify(err))
+                },
+            })
+        }
+
+        function showResult(result) {
+            document.getElementById('login-form-result').innerText = result
+        }
+    </script>
+</body></html>

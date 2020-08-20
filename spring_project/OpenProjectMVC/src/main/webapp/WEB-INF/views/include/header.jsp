@@ -17,8 +17,9 @@
 		<%-- <li><a href="${pageContext.request.contextPath}/login/loginForm.jsp">로그인</a></li> --%>
 		<li><a href="<c:url value="/login/login"/>">로그인</a></li>
 		
-		<c:if test="${!empty loginResult }">
-		<li><a href="${pageContext.request.contextPath}/member/memberMypage.do">마이페이지</a></li>
+		<c:if test="${!empty loginInfo }">
+		
+		<li><a href="<c:url value="/member/mypage/mypage"/>">마이페이지</a></li>
 		</c:if>
 		<li><a href="${pageContext.request.contextPath}/member/Guestbook.do">방명록(비회원)</a></li>
 		<li><a href="${pageContext.request.contextPath}/member/memberGuestbook.do">방명록(회원제)</a></li>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aia.mm.dao.MemberDao">
+
+	<!-- 회원가입 -->
+	<insert id="insertMember" parameterType="com.aia.mm.model.Member">
+		insert into test.member (uid, upw, uname, uphoto) values (#{uid}, #{upw}, #{uname}, #{uphoto})
+	</insert>
+	
+	<!-- 회원 수정 -->
+	<update id="editMember" parameterType="com.aia.mm.model.Member">
+		update test.member set upw = #{upw}, uphoto = #{uphoto} where idx = #{idx}
+	</update>
+	
+	<!-- 회원 삭제 -->
+	<delete id="deleteMember" parameterType="com.aia.mm.model.Member">
+		delete from test.member where idx = #{idx}
+	</delete>
+
+	<!-- 멤버 한명 출력 -->
+	<select id="selectByIdx" resultType="com.aia.mm.model.Member">
+
+		select * from test.member where idx=#{idx}
+
+	</select>
+
+	<!-- 전체 리스트 출력 -->
+	<select id="selectList" resultType="com.aia.mm.model.Member">
+		select * from test.member
+		order by idx desc
+	</select>
+
+
+	
+	
+	
+</mapper>
