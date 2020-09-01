@@ -7,8 +7,8 @@ import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +33,8 @@ public class RegController {
 	@Autowired
 	private AES256Util aes256Util;
 	
-	@Autowired
-	private BCryptPasswordEncoder PasswordEncoder ;
+//	@Autowired
+//	private BCryptPasswordEncoder PasswordEncoder ;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getRegForm() {
@@ -56,8 +56,8 @@ public class RegController {
 		
 		System.out.println("----------------------------------------------");
 		System.out.println("Spring Security 암호화");
-		System.out.println(PasswordEncoder.encode(regRequest.getUpw()));
-		System.out.println(PasswordEncoder.encode(regRequest.getUpw()).length());
+//		System.out.println(PasswordEncoder.encode(regRequest.getUpw()));
+//		System.out.println(PasswordEncoder.encode(regRequest.getUpw()).length());
 		
 		model.addAttribute("regRequest", regService.memberReg(regRequest,request));
 		

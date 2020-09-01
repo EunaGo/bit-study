@@ -18,17 +18,14 @@ public class DBCPInit extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 
-		loadJdbcDriver();		// �����ͺ��̽� ����̹� �ε�
-		initConnectionPool();	// Pool ����̹� �ε�(����)
+		loadJdbcDriver();		
+		initConnectionPool();	
 
 	}
 
 	private void loadJdbcDriver() {
 		try {
-			// Ŀ�ؼ� Ǯ�� ���ο��� ����� jdbc ����̹��� �ε���.
-			//Class.forName("oracle.jdbc.driver.OracleDriver");
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			// System.out.println("Oracle �����ͺ��̽� ����̹� �ε� ����...!!!!");
 			System.out.println("Mysql �����ͺ��̽� ����̹� �ε� ����...!!!!");
 		} catch (ClassNotFoundException ex) {
 			throw new RuntimeException("fail to load JDBC Driver", ex);
@@ -50,10 +47,6 @@ public class DBCPInit extends HttpServlet {
 			//Ŀ�ؼ�Ǯ�� ���ο� Ŀ�ؼ��� ������ �� ����� Ŀ�ؼ����丮�� ����.
 			ConnectionFactory connFactory = new DriverManagerConnectionFactory(jdbcDriver, username, pw);
 			
-			// PoolableConnection�� �����ϴ� ���丮 ����.
-			// DBCP�� Ŀ�ؼ��� ������ �� PoolableConnection �� ���
-			// ���� Ŀ�ؼ��� ��� ��������, Ŀ�ؼ� Ǯ�� �����ϴµ� �ʿ��� ����� �����Ѵ�.
-			// Ŀ�ؼ��� close�ϸ� �������� �ʰ� Ŀ�ؼ� Ǯ�� ��ȯ
 			PoolableConnectionFactory poolableConnFactory = new PoolableConnectionFactory(connFactory, null);
 			//Ŀ�ؼ��� ��ȿ���� ���θ� �˻��� �� ����ϴ� ������ �����Ѵ�.
 			poolableConnFactory.setValidationQuery("select 1");

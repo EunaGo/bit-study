@@ -212,23 +212,23 @@
 			<version>2.11.0</version>
 		</dependency>
 		<!--스프링시큐리티 web 라이브러리 -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>${org.springframework-version}</version>
-		</dependency>
+		</dependency> -->
 		<!--스프링시큐리티 core 라이브러리 -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>${org.springframework-version}</version>
-		</dependency>
+		</dependency> -->
 		<!--스프링시큐리티 config 라이브러리 -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework-version}</version>
-		</dependency>
+		</dependency> -->
 		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
 		<dependency>
 			<groupId>commons-codec</groupId>
