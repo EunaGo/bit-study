@@ -22,7 +22,6 @@ import com.aia.member.service.MemberRegService;
 import com.aia.member.service.MemberViewService;
 
 
-
 @RestController
 
 @RequestMapping("/members")

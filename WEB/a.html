@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title> Test page</title>
+
+        <style>
+            html, body{
+                width:100%;
+                height:100%;
+                margin:0;
+            }
+        #main{
+            background-color:black;
+            height:100%;
+            color: #fff;
+            font-size: 50px;
+            text-align:center;
+        }
+        section{
+            height:100%;
+        }
+        i{font-size:300px;}
+        </style>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="https://unpkg.com/typewriter-effect@2.3.1/dist/core.js"></script>
+        <script type="text/javascript">
+        $( document ).ready(function() {
+            var text = document.getElementById("textType");
+ 
+            var typewriter = new Typewriter(text, {
+                loop: true
+            });
+ 
+            typewriter.typeString('안녕하세요 !!')
+                .pauseFor(2500)
+                .deleteAll()
+                .typeString('고은아의 포트폴리오입니다.')
+                .pauseFor(2500)
+                .deleteChars(15)
+                .start();
+ 
+});
+        </script>
+    </head>
+    <body>
+        <section id="main">main 
+        <div id="textType"></div>
+        </section>
+
+    </body>
+</html>
